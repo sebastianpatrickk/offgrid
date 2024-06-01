@@ -15,7 +15,7 @@ export default function Page() {
           luxury.
         </p>
         <div className="flex gap-4">
-          <Link href="/villas" className={buttonVariants({ size: "lg" })}>
+          <Link href="/cabins" className={buttonVariants({ size: "lg" })}>
             Explore luxury cabins
           </Link>
         </div>
