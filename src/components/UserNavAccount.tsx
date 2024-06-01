@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, CreditCard, LogOut, Settings, User2 } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -13,7 +13,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
-export default function UserNavAccount() {
+export default function UserNavAccount({
+  user,
+}: {
+  user: { name: string; email: string };
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -37,17 +41,38 @@ export default function UserNavAccount() {
           />
         </p>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuLabel>
+          <div className="text-sm font-normal">
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-medium leading-none">{user.name}</p>
+              <p className="text-xs leading-none text-muted-foreground">
+                {user.email}
+              </p>
+            </div>
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/account">Account</Link>
+          <Link className="cursor-pointer" href="/account">
+            <User2 className="mr-2.5 size-4" /> Account
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/account/profile">Profile</Link>
+          <Link className="cursor-pointer" href="/account/billing">
+            <CreditCard className="mr-2.5 size-4" /> Billing
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/account/reservations">Reservations</Link>
+          <Link className="cursor-pointer" href="/account/settings">
+            <Settings className="mr-2.5 size-4" /> Settings
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link className="cursor-pointer" href="/account/logout">
+            <LogOut className="mr-2.5 size-4" /> Logout
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
